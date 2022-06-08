@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken')
 app.set('secretKey','hdjsakfhdjsk')
 
 const userValidation = (req, res,next) => {
-    jwt.verify(req.headers['x-access-token'], req.app.get('secretKey'), 
+    jwt.verify(req.headers['token'], req.app.get('secretKey'), 
     (err,decoded) =>{
         if(err){
             res.json({
@@ -24,6 +24,7 @@ const userValidation = (req, res,next) => {
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use('/user',userRoute)
+app.use('/todo',userValidation,todoRoute)
 app.get('/', (req,res) => {
     res.json({
         "APP": "JWT Based API Application",
