@@ -1,6 +1,7 @@
 const express = require('express')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
+require("dotenv").congig();
 const app = express()
 const userRoute = require('./app/api/routes/users') 
 const todoRoute = require('./app/api/routes/todo')
@@ -40,6 +41,6 @@ mongoose.connect(mongoURI)
     console.log(err)
 })
 
-app.listen(5000,() => {
+app.listen(process.env.port || 5000,() => {
     console.log("Successfully Running on the PORT: 5000")
 })                             
